@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 
 export default class Sort extends Component {
   state = {
-    sort_by: undefined,
-    order: undefined,
+    sort_by: 'created_at',
+    order: 'desc',
   };
   render() {
     return (
       <form>
         <label className="sort">
           Sort By:
-          <select className="form-control" onChange={this.sortingBy}>
-            <option value="">Select your option</option>
+          <select
+            className="form-control"
+            onChange={this.sortingBy}
+            value={this.state.sort_by}
+          >
             <option value="title">Title</option>
             <option value="topic">Topic</option>
             <option value="created_at">Date</option>
@@ -22,8 +25,11 @@ export default class Sort extends Component {
         </label>
         <label className="sort">
           Order By:
-          <select className="form-control" onChange={this.sortingOrder}>
-            <option value="">Select your option</option>
+          <select
+            className="form-control"
+            onChange={this.sortingOrder}
+            value={this.state.order}
+          >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>
