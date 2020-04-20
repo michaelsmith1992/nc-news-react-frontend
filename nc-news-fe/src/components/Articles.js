@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { getArticles } from '../utils/request';
 import ArticleList from './ArticleList';
 import Sort from './Sort';
-import AddArticle from './AddArticle';
+import ArticleAdder from './ArticleAdder';
 import Errors from './Errors';
 
 export default class Articles extends Component {
@@ -34,9 +34,10 @@ export default class Articles extends Component {
           <div className="col-md"></div>
           <h2 className="col-md">Articles</h2>
           <div className="col-md">
-            <AddArticle
+            <ArticleAdder
               topic={this.props.slug}
               handleUpdate={this.handleUpdate}
+              topics={this.props.topics}
             />
           </div>
         </div>

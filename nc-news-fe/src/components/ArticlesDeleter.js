@@ -3,7 +3,7 @@ import { deleteArticles } from '../utils/request';
 import { navigate } from '@reach/router';
 import Errors from './Errors';
 
-export default class DeleteArticles extends Component {
+export default class ArticlesDeleter extends Component {
   state = {
     errors: null,
   };
@@ -16,7 +16,11 @@ export default class DeleteArticles extends Component {
         />
       );
     return (
-      <button className="btn btn-danger" onClick={this.handleClick}>
+      <button
+        id="del-btn-art"
+        className="btn btn-danger"
+        onClick={this.handleClick}
+      >
         Delete Article
       </button>
     );

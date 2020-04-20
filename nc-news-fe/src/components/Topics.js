@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { getTopics } from '../utils/request';
 import Errors from './Errors';
 
 export default class Topics extends Component {
   state = {
-    topics: [],
     loading: true,
     errors: null,
   };
@@ -19,7 +17,7 @@ export default class Topics extends Component {
       );
     const { type } = this.props;
     if (type === 'nav') {
-      const topics = [...this.state.topics].slice(0, 9);
+      const topics = [...this.props.topics].slice(0, 9);
       return (
         <>
           {topics.map((topic) => {
@@ -33,9 +31,7 @@ export default class Topics extends Component {
         </>
       );
     }
-    if (this.state.loading) {
-      return <div className="loader">Loading...</div>;
-    }
+
     return (
       <div>
         <h2>Topics</h2>
@@ -48,7 +44,7 @@ export default class Topics extends Component {
             </tr>
           </thead>
           <tbody className="table-hover">
-            {this.state.topics.map((topic) => {
+            {this.props.topics.map((topic) => {
               const url = `./${topic.slug}`;
               return (
                 <tr key={topic.slug}>
@@ -64,13 +60,5 @@ export default class Topics extends Component {
         </table>
       </div>
     );
-  }
-  async componentDidMount() {
-    try {
-      const topics = await getTopics();
-      this.setState({ topics: topics.topics, loading: false });
-    } catch (error) {
-      this.setState({ errors: error });
-    }
   }
 }

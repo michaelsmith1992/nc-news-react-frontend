@@ -1,9 +1,9 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { postArticles, getTopics } from '../utils/request';
+import { postArticles } from '../utils/request';
 import Errors from './Errors';
 
-class AddArticle extends React.Component {
+class ArticleAdder extends React.Component {
   state = {
     show: false,
     name: null,
@@ -26,12 +26,12 @@ class AddArticle extends React.Component {
       );
     return (
       <>
-        <Button variant="primary" onClick={this.handleShow}>
+        <Button variant="primary" id="add-article" onClick={this.handleToggle}>
           Add a new Article
         </Button>
         <Modal
           show={this.state.show}
-          onHide={this.handleClose}
+          onHide={this.handleToggle}
           animation={false}
         >
           <Modal.Header closeButton>
@@ -44,7 +44,7 @@ class AddArticle extends React.Component {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Comment"
+                  placeholder="Title"
                   name="title"
                   onChange={this.handleChange}
                 ></input>
@@ -92,7 +92,7 @@ class AddArticle extends React.Component {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button variant="secondary" onClick={this.handleToggle}>
               Close
             </Button>
             <Button variant="primary" onClick={this.handleSubmit}>
@@ -104,9 +104,8 @@ class AddArticle extends React.Component {
     );
   }
   async componentDidMount() {
-    const { topics } = await getTopics();
     this.setState({
-      topics,
+      topics: this.props.topics,
       topic: this.props.topic ? this.props.topic : '',
     });
   }
@@ -126,7 +125,7 @@ class AddArticle extends React.Component {
           localStorage.getItem('username'),
           0
         );
-        this.handleClose();
+        this.handleToggle();
         this.props.handleUpdate(comments);
         this.setState({ validationError: false });
       }
@@ -149,8 +148,11 @@ class AddArticle extends React.Component {
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
-  handleClose = () => this.setState({ show: false });
-  handleShow = () => this.setState({ show: true });
+  handleToggle = () => {
+    this.setState((curVal) => {
+      return { show: !curVal.show };
+    });
+  };
 }
 
-export default AddArticle;
+export default ArticleAdder;

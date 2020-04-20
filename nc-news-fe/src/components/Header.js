@@ -1,21 +1,23 @@
 import React from 'react';
 import MobileNav from './MobileNav';
+import { Link } from '@reach/router';
 
 class Header extends React.Component {
   state = {
     mobNav: false,
   };
   render() {
-    const { username, name, avatar_url } = this.props.user;
+    const { name, avatar_url, username } = this.props.user;
+    const url = `/users/${username}`;
     if (this.state.mobNav) {
       return (
         <div>
-          <div>
-            <a id="nav-toggle-nav" onClick={this.handleClick}>
-              &#9776;
-            </a>
+          <div className="closeNav">
+            <button id="nav-toggle-nav" onClick={this.handleClick}>
+              x
+            </button>
           </div>
-          <MobileNav />
+          <MobileNav topics={this.props.topics} />
         </div>
       );
     }
@@ -23,14 +25,14 @@ class Header extends React.Component {
       <header>
         <div className="padding"></div>
         <h1 className="heading">Northcoders News</h1>
-        <div className="user-section">
-          <img id="user-img" src={avatar_url}></img>
+        <Link to={url} className="user-section">
+          <img id="user-img" src={avatar_url} alt="user-image"></img>
           <div id="user-name">{name}</div>
-        </div>
+        </Link>
         <div className="hamburger">
-          <a id="nav-toggle" onClick={this.handleClick}>
+          <button id="nav-toggle" onClick={this.handleClick}>
             &#9776;
-          </a>
+          </button>
         </div>
       </header>
     );

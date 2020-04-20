@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { getArticle, patchVotes } from '../utils/request';
 import Comments from './Comments';
 import Vote from './Vote';
-import DeleteArticles from './DeleteArticles';
+import ArticlesDeleter from './ArticlesDeleter';
 import Errors from './Errors';
 import moment from 'moment';
 
@@ -39,7 +39,10 @@ export default class Article extends Component {
               <Vote voteEvent={this.voteEvent} />
             </div>
             <div className="col-md del-btn">
-              <DeleteArticles id={this.props.article_id} />
+              {localStorage.getItem('username') ===
+                this.state.article.author && (
+                <ArticlesDeleter id={this.props.article_id} />
+              )}
             </div>
           </div>
           <div className="row mt-4">

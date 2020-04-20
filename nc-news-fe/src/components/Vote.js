@@ -25,7 +25,6 @@ export default class Vote extends Component {
     );
   }
   handleClick(number) {
-    console.log(number);
     this.setState((curVal) => {
       return { vote: curVal.vote + number };
     });

@@ -22,11 +22,16 @@ class ArticleList extends Component {
             <tbody className="table-hover">
               {articles.map((article) => {
                 const url = `../../articles/${article.article_id}`;
+                const topicUrl = `../../topics/${article.topic}`;
                 return (
                   <tr key={article.article_id}>
-                    <td>{article.title}</td>
+                    <td>
+                      <Link to={url}>{article.title}</Link>
+                    </td>
                     <td>{article.body.slice(0, 29)}...</td>
-                    <td>{article.topic}</td>
+                    <td>
+                      <Link to={topicUrl}>{article.topic}</Link>
+                    </td>
                     <td>{article.author}</td>
                     <td>{moment(article.created_at).format('DD/MM/YYYY')}</td>
                     <td>

@@ -58,8 +58,17 @@ export const patchCommentVotes = async (id, inc_votes) => {
   return data;
 };
 
+export const getAllUsers = async () => {
+  const { data } = await request.get(`/users`);
+  return data;
+};
+
+export const getUser = async (username) => {
+  const { data } = await request.get(`/users/${username}`);
+  return data;
+};
+
 export const postArticles = async (title, body, topic, author, votes) => {
-  console.log(title, body, topic, author, votes);
   const { data } = await request.post(`/articles`, {
     title,
     body,

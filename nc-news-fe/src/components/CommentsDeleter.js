@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { deleteComments } from '../utils/request';
 import Errors from './Errors';
 
-export default class DeleteComments extends Component {
+export default class CommentsDeleter extends Component {
   state = {
     errors: null,
   };
@@ -23,7 +23,7 @@ export default class DeleteComments extends Component {
   handleClick = async () => {
     try {
       await deleteComments(this.props.id);
-      this.props.handleUpdate();
+      this.props.handleDelete(this.props.id);
     } catch (error) {
       this.setState({ errors: error });
     }

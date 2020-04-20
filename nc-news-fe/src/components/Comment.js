@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DeleteComments from './DeleteComments';
+import DeleteComments from './CommentsDeleter';
 import Vote from './Vote';
 import { patchCommentVotes } from '../utils/request';
 import moment from 'moment';
@@ -12,7 +12,7 @@ export default class Comment extends Component {
     };
   }
   render() {
-    const { comment, handleUpdate } = this.props;
+    const { comment, handleDelete } = this.props;
     return (
       <div className="comment card">
         <div className="row">
@@ -31,17 +31,17 @@ export default class Comment extends Component {
           </div>
         </div>
 
-        {localStorage.getItem('username') === comment.author ? (
+        {localStorage.getItem('username') === comment.author && (
           <div className="row mt-3">
             <div className="col-9"></div>
             <div className="col">
               <DeleteComments
                 id={comment.comment_id}
-                handleUpdate={handleUpdate}
+                handleDelete={handleDelete}
               />
             </div>
           </div>
-        ) : null}
+        )}
       </div>
     );
   }

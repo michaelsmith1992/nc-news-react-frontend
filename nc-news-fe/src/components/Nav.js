@@ -2,11 +2,11 @@ import React from 'react';
 import Topics from './Topics';
 import { Link } from '@reach/router';
 
-const Nav = () => {
+const Nav = ({ topics }) => {
   return (
     <>
       <div className="logo-cont">
-        <img id="nc-logo" src="/logo.png" alt="logo" />
+        <img id="nc-logo" src="/logo.png" alt="northcoders-logo" />
       </div>
       <nav className="nav-bar">
         <ul className="nav-links">
@@ -20,10 +20,10 @@ const Nav = () => {
               Topics
             </Link>
           </li>
-          <Topics type="nav" />
+          <Topics type="nav" topics={topics} />
           <li className="nav-link">
-            <Link to="/about" className="link">
-              About
+            <Link to="/users" className="link">
+              Users
             </Link>
           </li>
         </ul>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getComments } from '../utils/request';
-import AddComments from './AddComment';
+import CommentsAdder from './CommentAdder';
 import Comment from './Comment';
 import Errors from './Errors';
 
@@ -23,13 +23,13 @@ export default class Comments extends Component {
     return (
       <div className="comments card">
         <h4>Comments</h4>
-        <AddComments id={this.props.id} handleUpdate={this.handleUpdate} />
+        <CommentsAdder id={this.props.id} handleUpdate={this.handleUpdate} />
         {this.state.comments.map((comment) => {
           return (
             <Comment
               key={comment.comment_id}
               comment={comment}
-              handleUpdate={this.handleUpdate}
+              handleDelete={this.handleDelete}
             />
           );
         })}
@@ -46,8 +46,15 @@ export default class Comments extends Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   }
-  handleUpdate = async (comments) => {
-    await this.getComments(this.state.limit);
+  handleUpdate = async (comment) => {
+    const comments = [comment, ...this.state.comments];
+    this.setState({ comments });
+  };
+  handleDelete = (id) => {
+    const comments = [...this.state.comments].filter((comment) => {
+      return comment.comment_id !== id;
+    });
+    this.setState({ comments });
   };
   handleScroll = async () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {

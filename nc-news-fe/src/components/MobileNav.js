@@ -2,7 +2,7 @@ import React from 'react';
 import Topics from './Topics';
 import { Link } from '@reach/router';
 
-const MobileNav = () => {
+const MobileNav = ({ topics }) => {
   return (
     <>
       <nav className="nav-bar-mob">
@@ -17,10 +17,10 @@ const MobileNav = () => {
               Topics
             </Link>
           </li>
-          <Topics type="nav" />
+          <Topics type="nav" topics={topics} />
           <li className="nav-link">
-            <Link to="/about" className="link">
-              About
+            <Link to="/users" className="link">
+              Users
             </Link>
           </li>
         </ul>
