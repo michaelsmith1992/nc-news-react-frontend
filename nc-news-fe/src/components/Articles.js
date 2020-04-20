@@ -11,7 +11,7 @@ export default class Articles extends Component {
     topic: null,
     order: undefined,
     sort_by: undefined,
-    limit: 10,
+    limit: 15,
     loading: true,
     loadingMore: false,
     max: 0,

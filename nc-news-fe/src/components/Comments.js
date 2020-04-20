@@ -7,7 +7,7 @@ import Errors from './Errors';
 export default class Comments extends Component {
   state = {
     comments: [],
-    limit: 3,
+    limit: 4,
     loadingMore: true,
     max: 0,
     errors: null,
@@ -62,7 +62,7 @@ export default class Comments extends Component {
         this.setState({ loadingMore: true });
         await this.getComments(this.state.limit + 3);
         this.setState((curVal) => {
-          return { loadingMore: false, limit: curVal.limit + 3 };
+          return { loadingMore: false, limit: curVal.limit + 2 };
         });
       }
     }
