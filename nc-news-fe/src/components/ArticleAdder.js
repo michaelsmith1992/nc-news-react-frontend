@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { postArticles } from '../utils/request';
 import Errors from './Errors';
+import UserContext from '../UserContext';
 
 class ArticleAdder extends React.Component {
   state = {
@@ -16,6 +17,8 @@ class ArticleAdder extends React.Component {
     topics: [],
     errors: null,
   };
+  static contextType = UserContext;
+
   render() {
     if (this.state.errors)
       return (
@@ -104,10 +107,26 @@ class ArticleAdder extends React.Component {
     );
   }
   async componentDidMount() {
+    console.log(this.props.topics);
     this.setState({
       topics: this.props.topics,
       topic: this.props.topic ? this.props.topic : '',
     });
+  }
+  async componentDidMount() {
+    console.log(this.props.topics);
+    this.setState({
+      topics: this.props.topics,
+      topic: this.props.topic ? this.props.topic : '',
+    });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.topics !== prevProps.topics) {
+      this.setState({
+        topics: this.props.topics,
+        topic: this.props.topic ? this.props.topic : '',
+      });
+    }
   }
   handleSubmit = async () => {
     try {

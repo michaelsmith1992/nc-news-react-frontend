@@ -34,7 +34,7 @@ class Header extends React.Component {
         <div className="padding"></div>
         <h1 className="heading">Northcoders News</h1>
         {auth ? (
-          <div class="dropdown">
+          <div className="dropdown">
             <div
               className="user-section dropdown-toggle"
               type="button"
