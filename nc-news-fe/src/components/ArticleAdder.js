@@ -122,7 +122,7 @@ class ArticleAdder extends React.Component {
           this.state.title,
           this.state.body,
           this.state.topic,
-          localStorage.getItem('username'),
+          this.context.user.user.username,
           0
         );
         this.handleToggle();

@@ -5,12 +5,15 @@ import Vote from './Vote';
 import ArticlesDeleter from './ArticlesDeleter';
 import Errors from './Errors';
 import moment from 'moment';
+import UserContext from '../UserContext';
 
 export default class Article extends Component {
   state = {
     article: {},
     errors: null,
   };
+  static contextType = UserContext;
+
   render() {
     if (this.state.errors)
       return (
@@ -19,6 +22,7 @@ export default class Article extends Component {
           msg={this.state.errors.response.data.msg}
         />
       );
+    console.log(this.context);
     return (
       <div>
         <h2>{this.state.article.title}</h2>
@@ -33,18 +37,20 @@ export default class Article extends Component {
               )}
             </p>
           </div>
-          <div className="row">
-            <div className="col-md">
-              <p>Votes: {this.state.article.votes}</p>
-              <Vote voteEvent={this.voteEvent} />
+          {this.context.user.user.username && (
+            <div className="row">
+              <div className="col-md">
+                <p>Votes: {this.state.article.votes}</p>
+                <Vote voteEvent={this.voteEvent} />
+              </div>
+              <div className="col-md del-btn">
+                {this.state.article.author ===
+                  this.context.user.user.username && (
+                  <ArticlesDeleter id={this.props.article_id} />
+                )}
+              </div>
             </div>
-            <div className="col-md del-btn">
-              {localStorage.getItem('username') ===
-                this.state.article.author && (
-                <ArticlesDeleter id={this.props.article_id} />
-              )}
-            </div>
-          </div>
+          )}
           <div className="row mt-4">
             <p>{this.state.article.body}</p>
           </div>

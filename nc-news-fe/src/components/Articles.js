@@ -4,6 +4,7 @@ import ArticleList from './ArticleList';
 import Sort from './Sort';
 import ArticleAdder from './ArticleAdder';
 import Errors from './Errors';
+import UserContext from '../UserContext';
 
 export default class Articles extends Component {
   state = {
@@ -17,6 +18,8 @@ export default class Articles extends Component {
     max: 0,
     errors: null,
   };
+  static contextType = UserContext;
+
   render() {
     if (this.state.errors)
       return (
@@ -34,11 +37,13 @@ export default class Articles extends Component {
           <div className="col-md"></div>
           <h2 className="col-md">Articles</h2>
           <div className="col-md">
-            <ArticleAdder
-              topic={this.props.slug}
-              handleUpdate={this.handleUpdate}
-              topics={this.props.topics}
-            />
+            {this.context.user.auth && (
+              <ArticleAdder
+                topic={this.props.slug}
+                handleUpdate={this.handleUpdate}
+                topics={this.props.topics}
+              />
+            )}
           </div>
         </div>
 
@@ -96,7 +101,10 @@ export default class Articles extends Component {
     });
   };
   handleScroll = async () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 150
+    ) {
       if (this.state.articles.length < this.state.max) {
         this.setState({ loadingMore: true });
         const articles = await this.fetchArticles(

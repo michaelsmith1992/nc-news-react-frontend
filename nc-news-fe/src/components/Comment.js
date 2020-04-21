@@ -3,6 +3,7 @@ import DeleteComments from './CommentsDeleter';
 import Vote from './Vote';
 import { patchCommentVotes } from '../utils/request';
 import moment from 'moment';
+import UserContext from '../UserContext';
 
 export default class Comment extends Component {
   constructor(props) {
@@ -11,6 +12,8 @@ export default class Comment extends Component {
       votes: props.comment.votes,
     };
   }
+  static contextType = UserContext;
+
   render() {
     const { comment, handleDelete } = this.props;
     return (
@@ -26,12 +29,14 @@ export default class Comment extends Component {
           <div className="col">
             <p className="text-cen">Votes: {this.state.votes}</p>
           </div>
-          <div className="col">
-            <Vote voteEvent={this.voteEvent} />
-          </div>
+          {this.context.user.auth && (
+            <div className="col">
+              <Vote voteEvent={this.voteEvent} />
+            </div>
+          )}
         </div>
 
-        {localStorage.getItem('username') === comment.author && (
+        {this.context.user.user.username === comment.author && (
           <div className="row mt-3">
             <div className="col-9"></div>
             <div className="col">
