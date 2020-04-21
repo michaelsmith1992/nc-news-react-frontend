@@ -4,6 +4,14 @@ const request = axios.create({
   baseURL: 'https://msmith-be-nc-news.herokuapp.com/api',
 });
 
+export const login = async (username, password) => {
+  const { data } = await request.post(`/login`, {
+    username,
+    password,
+  });
+  return data;
+};
+
 export const getArticles = async (topic, sort_by, order, limit) => {
   const { data } = await request.get('/articles', {
     params: { topic, sort_by, order, limit },

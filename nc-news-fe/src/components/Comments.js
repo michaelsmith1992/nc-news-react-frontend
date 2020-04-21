@@ -3,8 +3,10 @@ import { getComments } from '../utils/request';
 import CommentsAdder from './CommentAdder';
 import Comment from './Comment';
 import Errors from './Errors';
+import UserContext from '../UserContext';
 
 export default class Comments extends Component {
+  static contextType = UserContext;
   state = {
     comments: [],
     limit: 4,
@@ -23,7 +25,10 @@ export default class Comments extends Component {
     return (
       <div className="comments card">
         <h4>Comments</h4>
-        <CommentsAdder id={this.props.id} handleUpdate={this.handleUpdate} />
+        {this.context.user.auth && (
+          <CommentsAdder id={this.props.id} handleUpdate={this.handleUpdate} />
+        )}
+
         {this.state.comments.map((comment) => {
           return (
             <Comment

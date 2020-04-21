@@ -121,8 +121,8 @@ img.user-img {
   text-align: center;
 }
 
-.user-section:hover {
-  background-color: black;
+.user-section.dropdown-toggle::after {
+  content: none;
 }
 
 #user-name {
@@ -133,9 +133,17 @@ img.user-img {
   width: 100%;
 }
 #user-img {
-  height: 70%;
+  height: 2.3em;
   border-radius: 50%;
-  margin-right: 4%;
+  margin-right: 14%;
+}
+
+.dropdown,
+.dropleft,
+.dropright,
+.dropup {
+  position: relative;
+  width: 20%;
 }
 
 .nav-links {
@@ -204,6 +212,16 @@ a {
 h1,
 h2 {
   font-weight: bolder !important;
+}
+
+.login-btn {
+  margin-top: 1em;
+  height: 3em;
+  width: 5em;
+  display: flex !important; /*CSS3*/
+  align-items: center; /*Vertical align*/
+  justify-content: center; /*horizontal align*/
+  margin-left: 25%;
 }
 
 .articles-table {
@@ -330,5 +348,31 @@ h2 {
   }
   #del-btn-art {
     margin-top: 15px;
+  }
+
+  .desktop-login {
+    display: none;
+  }
+  .login-btn {
+    display: inline-block !important;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s;
+    margin-left: 0%;
+    height: 2.5em;
+  }
+  .row-padding {
+    height: 20px;
   }
 }
