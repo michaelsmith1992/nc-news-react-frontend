@@ -101,7 +101,10 @@ export default class Articles extends Component {
     });
   };
   handleScroll = async () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 150
+    ) {
       if (this.state.articles.length < this.state.max) {
         this.setState({ loadingMore: true });
         const articles = await this.fetchArticles(

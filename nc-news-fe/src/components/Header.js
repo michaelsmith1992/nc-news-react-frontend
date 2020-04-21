@@ -43,14 +43,14 @@ class Header extends React.Component {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img id="user-img" src={avatar_url} alt="user-image"></img>
+              <img id="user-img" src={avatar_url} alt="user"></img>
               <div id="user-name">{name}</div>
             </div>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <Link className="dropdown-item" to={url}>
                 Profile
               </Link>
-              <LogoutBtn style="dropdown-item" />
+              <LogoutBtn styling="dropdown-item" />
             </div>
           </div>
         ) : (

@@ -1,6 +1,6 @@
-import { navigate, Redirect } from '@reach/router';
+import { Redirect } from '@reach/router';
 import React from 'react';
-import UserContext, { UserProvider } from '../UserContext';
+import UserContext from '../UserContext';
 
 class PrivateRoute extends React.Component {
   static contextType = UserContext;

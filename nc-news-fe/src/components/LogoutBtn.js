@@ -6,9 +6,9 @@ class LogoutBtn extends React.Component {
 
   render() {
     return (
-      <a className={this.props.style} onClick={this.logoutClick}>
+      <div className={this.props.styling} onClick={this.logoutClick}>
         Logout
-      </a>
+      </div>
     );
   }
 

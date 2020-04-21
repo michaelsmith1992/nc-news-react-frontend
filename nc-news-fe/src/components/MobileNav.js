@@ -32,12 +32,12 @@ class MobileNav extends React.Component {
             </li>
             <li>
               {this.context.user.auth ? (
-                <LogoutBtn style="btn btn-danger" />
+                <LogoutBtn styling="btn btn-danger" />
               ) : (
                 <LoginBtn />
               )}
             </li>
-            <li class="row-padding"></li>
+            <li className="row-padding"></li>
           </ul>
         </nav>
       </>
